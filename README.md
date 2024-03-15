@@ -1,30 +1,43 @@
 # Personality Prediction from Dynamic Facial Expressions
 
 ## Overview
-This project is dedicated to predicting an individual's personality through dynamic facial expressions. Leveraging a variety of data analysis methodologies and machine learning algorithms, we've developed a system to analyze and predict personality traits effectively.
+This project explores the potential of using dynamic facial expressions to predict personality traits. Utilizing machine learning algorithms and data analysis, we aimed to establish correlations between facial expressions and the 'Big Five' personality traits.
 
 ## Data Collection
-- Collected basic demographic information and responses to the IPIP-NEO personality test from 73 participants.
-- Recorded videos of participants' facial expressions using a desktop camera.
+The data collection phase involved two primary data sources:
+
+- **Personality Test Data**: Participants completed the IPIP-NEO personality test, a well-regarded psychological assessment tool that quantifies the 'Big Five' personality traits: Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism. The data collection was facilitated via a translated version of the test, administered through a Google Forms interface.
+- **Facial Expression Data**: The researchers captured facial expressions using a desktop camera during controlled conversations with 73 participants. The average age was 20 (±1.6 years old). This facial data was analyzed for emotional expression at each frame using the Crowdemotion API, which classified expressions into six categories: Happiness, Sadness, Disgust, Anger, Surprise, and Fear.
 
 ## Data Analysis
-- **Personality Test Data**: Utilized the IPIP-NEO test to measure five major personality traits: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism.
-- **Facial Expression Data**: Employed the Crowdemotion API for real-time analysis of dynamic facial expressions.
+
+In the subsequent data analysis phase:
+
+- The study utilized the **R statistical software**, equipped with the **`httr`** package, to automate the uploading of test results to the IPIP-NEO website, fetching back a report comprising 35 percentage scores of the personality traits for each participant and their friends' assessment.
+- Emotional data, encoded as time-sequenced expressions, were downloaded for further analysis.
 
 ## Algorithms
-- **Hierarchical Clustering**: Implemented using complete-linkage, average-linkage, and single-linkage methods, along with K-means clustering based on Euclidean distance for personality categorization.
-- **Markov Model**: Applied to describe transition probabilities between six different emotional states derived from facial expression data.
-- **Naïve Bayes Classifiers**: Predicted personality types by calculating average emotion transition probabilities for people with similar personality traits.
+
+Three primary algorithms were applied in the study:
+
+- **Hierarchical Clustering**: This method was used to group participants based on their personality test results. The approach involved computing similarity measures, such as correlation coefficients and Euclidean distances, between participants. The hierarchical clustering was performed using three different agglomerative techniques: complete-linkage, average-linkage, and single-linkage clustering. These techniques systematically merge the data points (or clusters) that are closest together until all points have been merged into a single cluster or into the desired number of clusters.
+- **K-means Clustering**: Separately from hierarchical clustering,  K-means clustering was applied to the 73 participants as a method of partitioning them into k distinct clusters based on their personality test scores. K-means clustering aims to minimize the variance within clusters and is particularly useful for identifying distinct groupings when the number of clusters (k) is specified in advance. This method iteratively assigns each data point to the nearest cluster center (mean) and recalculates the new means until the assignment no longer changes.
+- **Markov Model**: A Markov Model was constructed to describe the transitions between different emotional states, assuming that the present emotional state depends solely on the previous state and not on any earlier states. This model quantified the probability of transitions between the six defined emotional states.
+- **Naïve Bayes Classifiers**: The Naïve Bayes Classifier was employed to predict the personality types based on the dynamic emotional data. The classifier worked by averaging the emotion transition probabilities for participants sharing similar personality profiles and applying these to predict the personality classification of an unseen participant based on their facial expressions.
 
 ## Results
-- **Personality Prediction**: Found Naïve Bayes Classifier predictions, based on facial expressions, to surpass acquaintance-based predictions and to be comparable to those by close friends.
-- **Predictive Accuracy**: Achieved an average predictive accuracy of 0.431, outperforming friends' average accuracy of 0.287.
-- **Leave One Out and Random Subsampling Tests**: Determined that the optimal number of personality clusters depends on the methodology, with excessive fragmentation potentially reducing accuracy.
+
+The system's predictive performance was rigorously evaluated:
+
+- **Predictive Performance**: The Naïve Bayes Classifier yielded predictions with an average accuracy of 0.431, which was superior to the accuracy of friends' assessments, which stood at 0.287. The predictions were also found to be comparable to those made by close friends.
+- **Validation Techniques**: Validation of the predictive model was conducted using the Leave One Out and Random Subsampling techniques. It was noted that while the Leave One Out method was subject to the availability of substantial training data, Random Subsampling provided a more robust assessment over repeated random selections of test data.
 
 ## Conclusion
-Facial expression analysis has been proven to be a reliable method for predicting personality within a brief interaction, demonstrating near-equal accuracy to that of an acquaintance's assessment and similar reliability to that of a close friend. For enhanced stability of predictions, an increase in data set and sample diversity is recommended.
+
+The study concluded that dynamic facial expression analysis could be employed reliably to predict personality traits within a short interaction time. The level of accuracy approached that of an acquaintance and showed considerable promise as compared to the detailed knowledge of a close friend. However, the researchers also acknowledged the need for a more extensive and diverse dataset to enhance prediction stability and generalizability.
 
 ## Practical Applications
+
 - **Digital Interfaces**: Tailoring user experiences based on inferred personality traits from facial expressions.
 - **Mental Health Services**: Assisting professionals in assessing client personalities more swiftly and objectively.
 - **HR and Team Building**: Improving recruitment processes and team dynamics with deeper personality insights.
