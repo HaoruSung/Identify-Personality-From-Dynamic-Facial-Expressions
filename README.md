@@ -1,5 +1,11 @@
 # Personality Prediction from Dynamic Facial Expressions
 
+
+<p align="center">
+  <img src="https://github.com/HaoruSung/Identify-Personality-From-Dynamic-Facial-Expressions/blob/main/Architecture.png" alt="drawing" style="width:500px;"/>
+</p>
+
+
 ## Overview
 This project explores the potential of using dynamic facial expressions to predict personality traits. Utilizing machine learning algorithms and data analysis, we aimed to establish correlations between facial expressions and the 'Big Five' personality traits.
 
